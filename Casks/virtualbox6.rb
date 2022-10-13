@@ -21,7 +21,6 @@ cask "virtualbox6" do
     "virtualbox",
     "homebrew/cask-versions/virtualbox-beta",
   ]
-  
   depends_on macos: ">= :high_sierra"
   depends_on arch: :x86_64
 

@@ -16,7 +16,6 @@ cask "virtualbox-extension-pack6" do
     "virtualbox-extension-pack",
     "virtualbox-extension-pack-beta",
   ]
-
   depends_on cask: "virtualbox6"
   container type: :naked
 

@@ -1,5 +1,3 @@
-# Mynameisbogdan Cask-versions
-
 ## How do I install these formulae?
 
 `brew install mynameisbogdan/cask-versions/<formula>`

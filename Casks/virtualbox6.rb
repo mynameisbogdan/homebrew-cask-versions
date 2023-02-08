@@ -19,6 +19,7 @@ cask "virtualbox6" do
 
   conflicts_with cask: [
     "virtualbox",
+    "homebrew/cask-versions/virtualbox6",
     "homebrew/cask-versions/virtualbox-beta",
   ]
   depends_on macos: ">= :high_sierra"

@@ -1,6 +1,6 @@
 cask "virtualbox-extension-pack6" do
-  version "6.1.40"
-  sha256 "29cf8410e2514ea4393f63f5e955b8311787873679fc23ae9a897fb70ef3f84a"
+  version "6.1.42"
+  sha256 "b0b6f388616ffebd06f24d434e850da95a56572f33ef8a13f7c9b5e2ac9b98bd"
 
   url "https://download.virtualbox.org/virtualbox/#{version}/Oracle_VM_VirtualBox_Extension_Pack-#{version}.vbox-extpack"
   name "Oracle VirtualBox Extension Pack"
@@ -8,8 +8,13 @@ cask "virtualbox-extension-pack6" do
   homepage "https://www.virtualbox.org/"
 
   livecheck do
-    url "https://download.virtualbox.org/virtualbox/LATEST-STABLE.TXT"
-    regex(/(\d+(?:\.\d+)+)/i)
+    url "https://www.virtualbox.org/wiki/Download_Old_Builds_6_1"
+    strategy :page_match do |page|
+      match = page.match(/href=.*?Oracle_VM_VirtualBox_Extension_Pack-(\d+(?:\.\d+)+).vbox-extpack/)
+      next if match.blank?
+
+      "#{match[1]}"
+    end
   end
 
   conflicts_with cask: [

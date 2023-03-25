@@ -2,12 +2,12 @@ cask "dotnet-sdk6" do
   arch arm: "arm64", intel: "x64"
 
   on_intel do
-    version "6.0.404,a93ff2f8-c9f6-41d9-ac15-1b96e77f111e,5296b688fcb69e34eb2c6d05a915ee71"
-    sha256 "ad76beaec22daccd535118b152f74c2bbbd7377ea8aab421ab992e89df41d29c"
+    version "6.0.407,91b09d38-854f-4888-ae10-b337b8c42045,3207fd5f87fcc22959311e588e531947"
+    sha256 "a1ca85f4b2b976afb7c053cebf7f29c72a605473ba3df127af8cb2679bc38432"
   end
   on_arm do
-    version "6.0.404,2a309cee-38ac-4fb5-877e-e4d0a9dbff1b,01a4ad5d7a0ff5734e0749b3880485fb"
-    sha256 "c603621b0a579299952f6aebacea79904c50b61131126b8107c7662d063a8204"
+    version "6.0.407,e953e1ca-4e28-4e40-b3de-c0bfce0596f1,43ec5885784a56be964baaf67b4a4742"
+    sha256 "c319c9f9bf3de9e17254ba596cc044e807bc5987e8d27f088741221ae441f86e"
   end
 
   url "https://download.visualstudio.microsoft.com/download/pr/#{version.csv.second}/#{version.csv.third}/dotnet-sdk-#{version.csv.first}-osx-#{arch}.pkg"
@@ -15,9 +15,15 @@ cask "dotnet-sdk6" do
   desc "Developer platform"
   homepage "https://www.microsoft.com/net/core#macos"
 
+  # This identifies releases with the same major/minor version as the current
+  # cask version. New major/minor releases occur annually in November and the
+  # check will automatically update its behavior when the cask is updated.
   livecheck do
-    cask "dotnet@6"
+    url "https://dotnetcli.blob.core.windows.net/dotnet/release-metadata/#{version.major_minor}/releases.json"
     regex(%r{/download/pr/([^/]+)/([^/]+)/dotnet-sdk-v?(\d+(?:\.\d+)+)-osx-#{arch}\.pkg}i)
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| "#{match[2]},#{match[0]},#{match[1]}" }
+    end
   end
 
   conflicts_with cask: [

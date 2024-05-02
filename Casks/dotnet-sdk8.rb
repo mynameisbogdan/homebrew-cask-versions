@@ -21,10 +21,10 @@ cask "dotnet-sdk8" do
   end
 
   conflicts_with cask: [
-    "dotnet",
     "dotnet-sdk",
-    "homebrew/cask-versions/dotnet-preview",
-    "homebrew/cask-versions/dotnet-sdk-preview",
+    "dotnet",
+    "dotnet-sdk@preview",
+    "dotnet@preview"
   ], formula: "dotnet"
   depends_on macos: ">= :mojave"
 

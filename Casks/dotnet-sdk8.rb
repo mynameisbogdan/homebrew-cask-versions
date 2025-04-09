@@ -35,7 +35,7 @@ cask "dotnet-sdk8" do
   depends_on macos: ">= :mojave"
 
   pkg "dotnet-sdk-#{version.csv.first}-osx-#{arch}.pkg"
-  binary "/usr/local/share/dotnet/dotnet"
+  # binary "/usr/local/share/dotnet/dotnet"
 
   uninstall pkgutil: [
     "com.microsoft.dotnet.*#{version.major_minor}*#{arch}",

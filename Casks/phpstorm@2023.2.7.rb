@@ -16,7 +16,7 @@ cask "phpstorm@2023.2.7" do
 
   conflicts_with cask: [
     "phpstorm",
-  ], formula: "dotnet"
+  ]
   depends_on macos: ">= :high_sierra"
 
   app "PhpStorm.app"

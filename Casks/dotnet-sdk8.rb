@@ -27,10 +27,11 @@ cask "dotnet-sdk8" do
   end
 
   conflicts_with cask: [
-    "dotnet-sdk",
     "dotnet-runtime",
+    "dotnet-runtime@preview",
+    "dotnet-sdk",
+    "dotnet-sdk@8",
     "dotnet-sdk@preview",
-    "dotnet-runtime@preview"
   ]
   depends_on macos: ">= :mojave"
 

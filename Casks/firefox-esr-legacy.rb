@@ -31,7 +31,6 @@ cask "firefox-esr-legacy" do
     "firefox@cn",
     "firefox@esr",
   ]
-  depends_on macos: ">= :mojave"
 
   app "Firefox.app"
 

@@ -8,8 +8,6 @@ cask "qbittorrent44" do
   desc "Peer to peer Bitorrent client"
   homepage "https://www.qbittorrent.org/"
 
-  depends_on macos: ">= :mojave"
-
   # Renamed for consistency: app name is different in the Finder and in a shell.
   app "qbittorrent.app", target: "qBittorrent.app"
 

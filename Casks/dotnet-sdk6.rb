@@ -32,7 +32,6 @@ cask "dotnet-sdk6" do
     "dotnet-sdk@preview",
     "dotnet-runtime@preview"
   ]
-  depends_on macos: ">= :mojave"
 
   pkg "dotnet-sdk-#{version.csv.first}-osx-#{arch}.pkg"
   # binary "/usr/local/share/dotnet/dotnet"

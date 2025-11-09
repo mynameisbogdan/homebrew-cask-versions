@@ -17,7 +17,6 @@ cask "phpstorm@2023.2.7" do
   conflicts_with cask: [
     "phpstorm",
   ]
-  depends_on macos: ">= :high_sierra"
 
   app "PhpStorm.app"
   # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)

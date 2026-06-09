@@ -26,7 +26,7 @@ cask "docker-desktop@legacy" do
     "rancher",
     "docker-desktop"
   ]
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "Docker.app"
   binary "#{appdir}/Docker.app/Contents/Resources/bin/docker",

@@ -14,21 +14,14 @@ cask "phpstorm@2023.2.7" do
     skip "Legacy version"
   end
 
-  conflicts_with cask: [
-    "phpstorm",
-  ]
+  conflicts_with cask: "phpstorm"
+  depends_on :macos
 
   app "PhpStorm.app"
-  # shim script (https://github.com/Homebrew/homebrew-cask/issues/18809)
-  shimscript = "#{staged_path}/phpstorm.wrapper.sh"
-  binary shimscript, target: "phpstorm"
+  command_wrapper "phpstorm",
+                  executable: "#{appdir}/PhpStorm.app/Contents/MacOS/phpstorm"
 
-  preflight do
-    File.write shimscript, <<~EOS
-      #!/bin/sh
-      exec '#{appdir}/PhpStorm.app/Contents/MacOS/phpstorm' "$@"
-    EOS
-  end
+  uninstall quit: "com.jetbrains.PhpStorm"
 
   zap trash: [
     "~/Library/Application Support/JetBrains/consentOptions",

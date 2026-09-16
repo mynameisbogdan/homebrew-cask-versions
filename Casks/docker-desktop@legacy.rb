@@ -50,22 +50,11 @@ cask "docker-desktop@legacy" do
   zsh_completion "#{appdir}/Docker.app/Contents/Resources/etc/docker-compose.zsh-completion"
   zsh_completion "#{appdir}/Docker.app/Contents/Resources/etc/docker.zsh-completion"
 
-  postflight do
-    kubectl_target = Pathname("/usr/local/bin/kubectl")
-
+  postflight_steps do
     # Only link if `kubernetes-cli` is not installed.
-    next if kubectl_target.exist?
-
-    system_command "/bin/ln", args: ["-sfn", appdir/"Docker.app/Contents/Resources/bin/kubectl", kubectl_target],
-                              sudo: !kubectl_target.dirname.writable?
-  end
-
-  uninstall_postflight do
-    kubectl_target = Pathname("/usr/local/bin/kubectl")
-
-    if kubectl_target.symlink? && kubectl_target.readlink == appdir/"Docker.app/Contents/Resources/bin/kubectl"
-      system_command "/bin/rm", args: [kubectl_target],
-                                sudo: !kubectl_target.dirname.writable?
+    unless_path_exists "/usr/local/bin/kubectl" do
+      symlink "{{appdir}}/Docker.app/Contents/Resources/bin/kubectl", "/usr/local/bin/kubectl",
+              remove_on_uninstall: true, sudo: :if_needed, overwrite: true
     end
   end
 
@@ -74,7 +63,10 @@ cask "docker-desktop@legacy" do
               "com.docker.socket",
               "com.docker.vmnetd",
             ],
-            quit:      "com.docker.docker",
+            quit:      [
+              "com.docker.docker",
+              "com.electron.dockerdesktop",
+            ],
             delete:    [
               "/Library/PrivilegedHelperTools/com.docker.socket",
               "/Library/PrivilegedHelperTools/com.docker.vmnetd",
@@ -91,8 +83,11 @@ cask "docker-desktop@legacy" do
         "~/Library/Application Support/com.apple.sharedfilelist/com.apple.LSSharedFileList.ApplicationRecentDocuments/com.electron.dockerdesktop.sfl*",
         "~/Library/Application Support/com.bugsnag.Bugsnag/com.docker.docker",
         "~/Library/Application Support/Docker Desktop",
+        "~/Library/Application Support/docker-secrets-engine",
         "~/Library/Caches/com.docker.docker",
         "~/Library/Caches/com.plausiblelabs.crashreporter.data/com.docker.docker",
+        "~/Library/Caches/Docker Desktop",
+        "~/Library/Caches/docker-secrets-engine",
         "~/Library/Caches/KSCrashReports/Docker",
         "~/Library/Containers/com.docker.docker",
         "~/Library/Containers/com.docker.helper",

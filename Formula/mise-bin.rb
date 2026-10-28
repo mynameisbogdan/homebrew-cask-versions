@@ -1,7 +1,7 @@
 class MiseBin < Formula
   desc "Polyglot runtime manager (asdf rust clone)"
   homepage "https://mise.jdx.dev/"
-  version "2026.10.17"
+  version "2026.10.21"
   license "MIT"
 
   livecheck do
@@ -14,12 +14,12 @@ class MiseBin < Formula
   on_macos do
     on_intel do
       url "https://github.com/jdx/mise/releases/download/v#{version}/mise-v#{version}-macos-x64.tar.xz"
-      sha256 "d0875f35ce55abfcfe5222d976322a793cf0abf266e1d7c9ec18b9d0dbd4ce6b"
+      sha256 "ec7eda34bce4a23bccf6104f5f4ab2ab798abd31a0137d28f2fe9ef2b3ead23a"
     end
 
     on_arm do
       url "https://github.com/jdx/mise/releases/download/v#{version}/mise-v#{version}-macos-arm64.tar.xz"
-      sha256 "8eb476e56f680a9347ce29346768d84174f631a37e0317759e2e2a565830ca5d"
+      sha256 "27755813e64f7a064e4e9c7df2332b3499fcb018a8c3ca699ec149df4aa20e8c"
     end
   end
 
